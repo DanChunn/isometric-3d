@@ -17,16 +17,14 @@ public class PlayerController : MonoBehaviour {
 
 	void Update() 
 	{
-		moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-		moveDirection = transform.TransformDirection(moveDirection);
-		moveDirection *= speed;
-		// if (controller.isGrounded) 
-		// {
-		// 	moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-		// 	moveDirection = transform.TransformDirection(moveDirection);
-		// 	moveDirection *= speed;
-		// }
-		//moveDirection.y -= gravity * Time.deltaTime; //manual gravity
+		if (controller.isGrounded) 
+		{
+			moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+			moveDirection = transform.TransformDirection(moveDirection);
+			moveDirection *= speed;
+		}
+		
+		moveDirection.y -= gravity * Time.deltaTime; //apply gravity
 		controller.Move(moveDirection * Time.deltaTime);
 	}
 }
